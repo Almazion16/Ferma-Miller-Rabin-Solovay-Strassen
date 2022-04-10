@@ -5,41 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ferma"
         mc:Ignorable="d"
-        Title="MainWindow" Height="374.4" Width="1002">
+        Title="MainWindow" Height="404.8" Width="1002">
     <Grid Background="#CC656565">
-        <TextBox DataObject.Pasting="BitSize_Pasting" x:Name="BitSize" HorizontalAlignment="Left" Height="16" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" Margin="160,37,0,0" PreviewTextInput="BitSize_PreviewTextInput" PreviewKeyDown="BitSize_PreviewKeyDown" RenderTransformOrigin="-0.896,0.991"/>
+        <!--tools-->
+        <TextBox DataObject.Pasting="BitSize_Pasting" x:Name="BitSize" HorizontalAlignment="Left" Height="16" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" Margin="26,33,0,0" PreviewTextInput="BitSize_PreviewTextInput" PreviewKeyDown="BitSize_PreviewKeyDown" RenderTransformOrigin="-0.896,0.991"/>
+        <TextBlock HorizontalAlignment="Left" Margin="26,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Количество бит в числе:"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="223,33,0,0" TextWrapping="Wrap" Text="Число:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="144,143,0,0" Height="16" Width="118"><Run Text="Число для проверки:"/><LineBreak/><Run/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Вероятность ошибки:" VerticalAlignment="Top" Margin="141,257,0,0"/>
+        
+        <!--M-R-->
         <TextBox IsReadOnly="True" x:Name="ResultNumber" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Margin="262,33,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="21,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Количество бит в числе:"/></TextBlock>
         <Button x:Name="Generate" Content="Сгенерировать" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="262,103,0,0" Click="Generate_Click"/>
-        <TextBlock HorizontalAlignment="Left" Margin="262,11,0,0" TextWrapping="Wrap" Text="Число:" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="266,122,0,0" Height="16" Width="129"><Run Text="Число для проверки:"/><LineBreak/><Run/></TextBlock>
         <TextBox DataObject.Pasting="NumberForChecking_Pasting" x:Name="NumberForChecking" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Margin="262,142,0,0" PreviewTextInput="NumberForChecking_PreviewTextInput" PreviewKeyDown="NumberForChecking_PreviewKeyDown"/>
         <Button x:Name="Check" Content="Проверить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Margin="261,211,0,0" Click="Check_Click"/>
+        <TextBox IsReadOnly="true" x:Name="Error" HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="261,259,0,0"/>
+        <TextBox x:Name="Time1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="261,319,0,0"/>
+        
+        
+        <!--Ferma-->
+        <TextBox x:Name="SecNumber" IsReadOnly="True" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Margin="500,32,0,0"/>
+        <TextBox DataObject.Pasting="NumberForChecking_Pasting" x:Name="SecCheck" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Margin="501,143,0,0" PreviewTextInput="NumberForChecking_PreviewTextInput" PreviewKeyDown="NumberForChecking_PreviewKeyDown"/>
+        <TextBox IsReadOnly="true" x:Name="SecError" HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="500,259,0,0"/>
+        <Button x:Name="SecGenBut" Content="Сгенерировать" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="500,103,0,0" Click="SecGenBut_Click"/>
+        <Button x:Name="SecCheckBut" Content="Проверить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Margin="501,211,0,0" Click="SecCheckBut_Click"/>
+        <TextBox x:Name="Time2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="500,319,0,0"/>
 
-
-        <ComboBox x:Name="Mode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="160,10,0,0" SelectedIndex="0" Height="20" FontSize="10" SelectionChanged="Mode_SelectionChanged">
-            <TextBlock TextWrapping="Wrap" Text="Ферма"/>
-            <TextBlock TextWrapping="Wrap" Text="Миллера-Рабина"/>
-        </ComboBox>
-
-
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Выбрать тест:" VerticalAlignment="Top" Margin="21,14,0,0"/>
+        
+        <!--Sol-Sh-->
+        <TextBox x:Name="SSGenerateNumber" IsReadOnly="True" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Margin="730,32,0,0"/>
+        <TextBox DataObject.Pasting="NumberForChecking_Pasting" x:Name="SSCheckNumber" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Margin="730,143,0,0" PreviewTextInput="NumberForChecking_PreviewTextInput" PreviewKeyDown="NumberForChecking_PreviewKeyDown"/>
+        <TextBox IsReadOnly="true" x:Name="SSError" HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="730,259,0,0"/>
+        <Button x:Name="SSGenerateButton" Content="Сгенерировать" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="730,103,0,0" Click="SSGenerateButton_Click"/>
+        <Button x:Name="SsCheckButton" Content="Проверить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Margin="731,211,0,0" Click="SsCheckButton_Click"/>
+        <TextBox x:Name="SSTime" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="730,319,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Время:" VerticalAlignment="Top" Margin="222,319,0,0"/>
+        
+        
+        <!--Hidden(unusable)-->
+        <TextBlock Visibility="Hidden" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Выбрать тест:" VerticalAlignment="Top" Margin="21,14,0,0"/>
         <TextBlock Visibility="Hidden" x:Name="BlockTimes" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Количество проверок:" VerticalAlignment="Top" Margin="21,59,0,0"/>
         <TextBox Visibility="Hidden" x:Name="Times" HorizontalAlignment="Left" Height="16" TextWrapping="Wrap" VerticalAlignment="Top" Text="" Width="76" Margin="160,60,0,0"/>
         <TextBlock Visibility="Hidden" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="21,80,0,0"><Run Text="*"/><Run Text="для теста Миллера-Рабина"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="21,101,0,0" Height="61" Width="215"><Run Text="*"/><Run Text="при "/><Run Text="генерации"/><Run Text=" числа на простоту "/><Run Text="число проверок автоматически берется равным количеству бит в числе"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Вероятность ошибки:" VerticalAlignment="Top" Margin="262,252,0,0"/>
-        <TextBox IsReadOnly="true" x:Name="Error" HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="261,273,0,0"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Число" VerticalAlignment="Top" Margin="501,11,0,0"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Число для проверки" VerticalAlignment="Top" Margin="501,122,0,0"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Вероятность ошибки" VerticalAlignment="Top" Margin="500,252,0,0"/>
-        <TextBox x:Name="SecNumber" IsReadOnly="True" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Margin="500,32,0,0"/>
-        <TextBox DataObject.Pasting="NumberForChecking_Pasting" x:Name="SecCheck" HorizontalAlignment="Left" Height="66" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Margin="501,143,0,0" PreviewTextInput="NumberForChecking_PreviewTextInput" PreviewKeyDown="NumberForChecking_PreviewKeyDown"/>
-        <TextBox IsReadOnly="true" x:Name="SecError" HorizontalAlignment="Left" Height="45" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" Margin="500,273,0,0"/>
-        <Button x:Name="SecGenBut" Content="Сгенерировать" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Margin="500,103,0,0" Click="SecGenBut_Click"/>
-        <Button x:Name="SecCheckBut" Content="Проверить" HorizontalAlignment="Left" VerticalAlignment="Top" Width="111" Margin="504,211,0,0" Click="SecCheckBut_Click"/>
-        <TextBox x:Name="Time1" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Margin="262,318,0,0"/>
-        <TextBox x:Name="Time2" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" Margin="500,318,0,0"/>
-
+        <ComboBox Visibility="Hidden" x:Name="Mode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="160,10,0,0" SelectedIndex="0" Height="20" FontSize="10" SelectionChanged="Mode_SelectionChanged">
+            <TextBlock TextWrapping="Wrap" Text="Ферма"/>
+            <TextBlock TextWrapping="Wrap" Text="Миллера-Рабина"/>
+        </ComboBox>
     </Grid>
 </Window>

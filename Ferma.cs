@@ -88,6 +88,10 @@ namespace Ferma
         //Рандом от 0 до числа
         public static BigInteger getRandom(int length, BigInteger min, BigInteger max)
         {
+            if (length == 0)
+            {
+
+            }
             BigInteger num;
             Random random = new Random();
             BitArray bitarr = new BitArray(length);
@@ -147,6 +151,7 @@ namespace Ferma
             }
             return Result;
         }
+
 
 
 

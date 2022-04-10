@@ -47,7 +47,7 @@ namespace Ferma
         //генератор
         private void Generate_Click(object sender, RoutedEventArgs e)
         {
-            //0 -Ферма
+            
             Stopwatch clock = new Stopwatch();
             if (Mode.SelectedIndex == 0)
             {
@@ -69,39 +69,17 @@ namespace Ferma
                 } while (!Fermas.FermaAlg(num, bits));
                 clock.Stop();
                 ResultNumber.Text = num.ToString();
-               
-                Error.Text = Math.Pow(2, -bits).ToString();
+
+                Error.Text = Math.Pow(2, -(Log2n(num))).ToString();
                 Time1.Text = clock.ElapsedMilliseconds.ToString() + " миллисекунд";
             }
-            //1- Миллер-Рабин
-/*            else 
-            {
-                if (BitSize.Text == "")
-                {
-                    MessageBox.Show("Введите число бит");
-                    return;
-                }
-                clock.Start();
-                int bits = int.Parse(BitSize.Text);
-                BigInteger num = 0;
-                do
-                {
 
-                    num = Fermas.getRandom(bits, Fermas.minimum(bits), Fermas.maximum(bits));
-
-
-                } while (!M_R.MRTest(num,Log2n(num)));
-                clock.Stop();
-                ResultNumber.Text = num.ToString();
-                Error.Text = Math.Pow(4, -Log2n(num)).ToString();
-                MessageBox.Show("Затраченное время " + clock.ElapsedMilliseconds / 1000 + " секунд(" + clock.ElapsedMilliseconds + " миллисекунд)");
-            }*/
         }
 
         private void Check_Click(object sender, RoutedEventArgs e)
         {
             Stopwatch clock = new Stopwatch();
-            //0-Ferma
+            
             if (Mode.SelectedIndex==0)
             {
                 if (NumberForChecking.Text == "")
@@ -110,14 +88,14 @@ namespace Ferma
                     return;
                 }
                 clock.Start();
-                BigInteger a = BigInteger.Parse(NumberForChecking.Text);
-
-                int bits = a.ToByteArray().Length * 8;//int.Parse(BitSize.Text);
-                if (Fermas.FermaAlg(a, bits))
+                BigInteger num = BigInteger.Parse(NumberForChecking.Text);
+                int log = Log2n(num);
+               
+                if (Fermas.FermaAlg(num, log))
                 {
                     clock.Stop();
                     MessageBox.Show("Число вероятно простое");
-                    Error.Text = Math.Pow(2, -bits).ToString();
+                    Error.Text = Math.Pow(2, -log).ToString();
                 }
                 else
                 {
@@ -129,31 +107,7 @@ namespace Ferma
                 
 
             }
-            //1-M-R
-          /*  else 
-            {
-                if (NumberForChecking.Text == "")
-                {
-                    MessageBox.Show("Введите число");
-                    return;
-                }
-                
-                clock.Start();
-                int log = Log2n(BigInteger.Parse(NumberForChecking.Text));
-                if (M_R.MRTest(BigInteger.Parse(NumberForChecking.Text),log))
-                {
-                    clock.Stop();
-                    MessageBox.Show("Число вероятно простое");
-                    Error.Text = Math.Pow(4, -log).ToString();
-                }
-                else
-                {
-                    clock.Stop();
-                    MessageBox.Show("Число составное");
-                    Error.Text = "0";
-                }
-                MessageBox.Show("Затраченное время " + clock.ElapsedMilliseconds / 1000 + " секунд(" + clock.ElapsedMilliseconds + " миллисекунд)");
-            }*/
+
 
 
         }
@@ -228,8 +182,9 @@ namespace Ferma
             }
 
             clock.Start();
-            int log = Log2n(BigInteger.Parse(NumberForChecking.Text));
-            if (M_R.MRTest(BigInteger.Parse(NumberForChecking.Text), log))
+            BigInteger num = BigInteger.Parse(NumberForChecking.Text);
+            int log = Log2n(num);
+            if (M_R.MRTest(num, log))
             {
                 clock.Stop();
                 MessageBox.Show("Число вероятно простое");
@@ -268,6 +223,58 @@ namespace Ferma
             SecError.Text = Math.Pow(4, -Log2n(num)).ToString();
             Time2.Text = clock.ElapsedMilliseconds.ToString() + " миллисекунд";
            
+        }
+
+        private void SSGenerateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Stopwatch clock = new Stopwatch();
+            if (BitSize.Text == "")
+            {
+                MessageBox.Show("Введите число бит");
+                return;
+            }
+            clock.Start();
+            int bits = int.Parse(BitSize.Text);
+            BigInteger num = 0;
+            int log = 0;
+            do
+            {
+
+                num = Fermas.getRandom(bits, Fermas.minimum(bits), Fermas.maximum(bits));
+                log = Log2n(num);
+
+            } while (!SSh.SShAlg(num, log));
+            clock.Stop();
+            SSGenerateNumber.Text = num.ToString();
+            SSError.Text = Math.Pow(2, log).ToString();
+            SSTime.Text = clock.ElapsedMilliseconds.ToString() + " миллисекунд";
+        }
+
+        private void SsCheckButton_Click(object sender, RoutedEventArgs e)
+        {
+            Stopwatch clock = new Stopwatch();
+            if (NumberForChecking.Text == "")
+            {
+                MessageBox.Show("Введите число");
+                return;
+            }
+            clock.Start();
+            BigInteger num = BigInteger.Parse(NumberForChecking.Text);
+
+            int log = Log2n(num);
+            if (SSh.SShAlg(num, log))
+            {
+                clock.Stop();
+                MessageBox.Show("Число вероятно простое");
+                SSError.Text = Math.Pow(2, -log).ToString();
+            }
+            else
+            {
+                clock.Stop();
+                MessageBox.Show("Число составное");
+                SSError.Text = "0";
+            }
+            SSTime.Text = clock.ElapsedMilliseconds.ToString() + " миллисекунд";
         }
     }
 }
